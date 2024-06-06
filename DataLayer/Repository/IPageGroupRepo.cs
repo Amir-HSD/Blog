@@ -8,6 +8,7 @@ namespace DataLayer
 {
     public interface IPageGroupRepo
     {
+        
         IEnumerable<PageGroup> GetAllPageGroups();
 
         PageGroup GetPageGroupById(int id);
@@ -22,6 +23,7 @@ namespace DataLayer
 
         void SaveChanges();
 
+        void Dispose();
 
     }
 }

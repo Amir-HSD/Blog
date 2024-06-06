@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DataLayer.Page>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PageGroup.PageGroupTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageVisitorCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageCreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageGroup.PageGroupTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageVisitorCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageCreateDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PageId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PageId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PageId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,19 @@
+﻿@model DataLayer.PageGroup
+
+@{
+    ViewBag.Title = "Details";
+}
+<h5>Page Group Detail</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PageGroupTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageGroupTitle)
+        </dd>
+
+    </dl>
+</div>

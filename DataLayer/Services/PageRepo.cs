@@ -9,7 +9,12 @@ namespace DataLayer
 {
     public class PageRepo : IPageRepo
     {
-        WeblogContext _db = new WeblogContext();
+        WeblogContext _db;
+
+        public PageRepo(WeblogContext Context)
+        {
+            _db = Context;
+        }
 
         public IEnumerable<Page> GetAllPages()
         {
@@ -78,5 +83,11 @@ namespace DataLayer
         {
             _db.SaveChanges();
         }
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
+
     }
 }

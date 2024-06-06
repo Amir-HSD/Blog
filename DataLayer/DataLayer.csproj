@@ -61,6 +61,7 @@
     <Compile Include="Models\PageComment.cs" />
     <Compile Include="Models\PageGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IPageCommentRepo.cs" />
     <Compile Include="Repository\IPageGroupRepo.cs" />
     <Compile Include="Repository\IPageRepo.cs" />
     <Compile Include="Services\PageGroupRepo.cs" />

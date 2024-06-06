@@ -22,5 +22,7 @@ namespace DataLayer
 
         void SaveChanges();
 
+        void Dispose();
+
     }
 }
