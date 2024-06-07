@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create","Pages",new {@class="btn btn-success"})
 </p>
 <table class="table">
     <tr>
@@ -16,12 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PageTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageContent)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PageImage)
@@ -44,13 +38,7 @@
             @Html.DisplayFor(modelItem => item.PageTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PageDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageImage)
+            <img src="~/Content/images/@item.PageImage" class="img-thumbnail" style="max-width: 100px" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PageVisitorCount)
@@ -59,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.PageCreateDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PageId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PageId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PageId })
+            @Html.ActionLink("Details", "Details", new { id = item.PageId }, new { @class = "btn btn-secondary" }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.PageId }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PageId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

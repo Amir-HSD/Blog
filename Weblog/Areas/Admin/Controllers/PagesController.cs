@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataLayer;
+using Microsoft.Ajax.Utilities;
 
 namespace Weblog.Areas.Admin.Controllers
 {
@@ -56,7 +57,7 @@ namespace Weblog.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage,PageVisitorCount,PageCreateDate")] Page page, HttpPostedFileBase imgUp)
+        public ActionResult Create([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage")] Page page, HttpPostedFileBase imgUp)
         {
             if (ModelState.IsValid)
             {
@@ -99,10 +100,19 @@ namespace Weblog.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage,PageVisitorCount,PageCreateDate")] Page page)
+        public ActionResult Edit([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage,PageVisitorCount,PageCreateDate")] Page page, HttpPostedFileBase imgUp)
         {
             if (ModelState.IsValid)
             {
+                if (imgUp != null)
+                {
+                    if (page.PageImage != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("/Content/images/" + page.PageImage));
+                    }
+                    page.PageImage = Guid.NewGuid() + Path.GetExtension(imgUp.FileName);
+                    imgUp.SaveAs(Server.MapPath("/Content/images/" + page.PageImage));
+                }
                 PageRepo.UpdatePage(page);
                 PageRepo.SaveChanges();
                 return RedirectToAction("Index");
