@@ -1,33 +1,54 @@
-﻿@{
+﻿@model IEnumerable<DataLayer.Page>
+@{
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<div class="col-lg-8  mb-5 mb-lg-0">
+    <h2 class="h5 section-title">Recent Post</h2>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
-    </div>
-</main>
+    @foreach (var item in Model)
+    {
+        <article class="card mb-4">
+            <div class="post-slider">
+                <img src="/Content/images/@item.PageImage" class="card-img-top" alt="post-thumb">
+            </div>
+            <div class="card-body">
+                <h3 class="mb-3"><a class="post-title" href="post-details.html">@item.PageTitle</a></h3>
+                <ul class="card-meta list-inline">
+                    <li class="list-inline-item">
+                        <a href="author-single.html" class="card-meta-author">
+                            <img src="/Content/images/john-doe.jpg">
+                            <span>Mark Dinn</span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="ti-timer"></i>2 Min To Read
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="ti-calendar"></i>@item.PageCreateDate
+                    </li>
+                    <li class="list-inline-item">
+                        <ul class="card-meta-tag list-inline">
+                            <li class="list-inline-item"><a href="tags.html">Decorate</a></li>
+                            <li class="list-inline-item"><a href="tags.html">Creative</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>@item.PageDescription</p>
+                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+            </div>
+        </article>
+    }
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item page-item active ">
+            <a href="#!" class="page-link">1</a>
+        </li>
+        <li class="page-item">
+            <a href="#!" class="page-link">2</a>
+        </li>
+        <li class="page-item">
+            <a href="#!" class="page-link">&raquo;</a>
+        </li>
+    </ul>
+</div>

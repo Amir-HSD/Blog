@@ -42,6 +42,8 @@ namespace DataLayer
 
         public virtual ICollection<PageComment> PageComments { get; set; }
 
+        public virtual ICollection<Tag> Tags { get; set; }
+
         public Page()
         {
             

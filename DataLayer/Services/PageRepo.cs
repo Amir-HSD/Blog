@@ -89,5 +89,10 @@ namespace DataLayer
             _db.Dispose();
         }
 
+        public IEnumerable<Page> GetPagesByGroupId(int GroupId)
+        {
+            return _db.Pages.Where(p=> p.PageGroupId == GroupId);
+
+        }
     }
 }

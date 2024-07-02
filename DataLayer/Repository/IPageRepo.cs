@@ -10,6 +10,8 @@ namespace DataLayer
     {
         IEnumerable<Page> GetAllPages();
 
+        IEnumerable<Page> GetPagesByGroupId(int GroupId);
+
         Page GetPageById(int id);
 
         bool AddPage(Page page);

@@ -1,0 +1,7 @@
+﻿@model IEnumerable<DataLayer.ShowGroups>
+<ul class="list-inline widget-list-inline">
+    @foreach (var item in Model)
+    {
+        <li class="list-inline-item"><a href="Category/@item.GroupID/@item.GroupName">@item.GroupName</a></li>
+    }
+</ul>

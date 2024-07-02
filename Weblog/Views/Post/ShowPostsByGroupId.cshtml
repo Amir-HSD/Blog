@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DataLayer.Page>
+@{
+    ViewBag.Title = "ShowPostsByGroupId";
+}
+
+<div class="col-lg-8  mb-5 mb-lg-0">
+    <h1 class="h2 mb-4">Showing items from <mark>@ViewBag.GroupTitle</mark></h1>
+
+    @foreach (var item in Model)
+    {
+        <article class="card mb-4">
+            <div class="post-slider">
+                <img src="/Content/images/@item.PageImage" class="card-img-top" alt="post-thumb">
+            </div>
+            <div class="card-body">
+                <h3 class="mb-3"><a class="post-title" href="post-details.html">@item.PageTitle</a></h3>
+                <ul class="card-meta list-inline">
+                    <li class="list-inline-item">
+                        <a href="author-single.html" class="card-meta-author">
+                            <img src="/Content/images/john-doe.jpg">
+                            <span>Mark Dinn</span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="ti-timer"></i>2 Min To Read
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="ti-calendar"></i>@item.PageCreateDate
+                    </li>
+                    <li class="list-inline-item">
+                        <ul class="card-meta-tag list-inline">
+                            <li class="list-inline-item"><a href="tags.html">Decorate</a></li>
+                            <li class="list-inline-item"><a href="tags.html">Creative</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>@item.PageDescription</p>
+                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+            </div>
+        </article>
+    }
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item page-item active ">
+            <a href="#!" class="page-link">1</a>
+        </li>
+        <li class="page-item">
+            <a href="#!" class="page-link">2</a>
+        </li>
+        <li class="page-item">
+            <a href="#!" class="page-link">&raquo;</a>
+        </li>
+    </ul>
+</div>
+

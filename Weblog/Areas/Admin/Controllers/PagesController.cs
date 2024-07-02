@@ -18,9 +18,12 @@ namespace Weblog.Areas.Admin.Controllers
 
         IPageRepo PageRepo;
 
+        IPageTagRepo TagRepo;
+
         public PagesController()
         {
             PageRepo = new PageRepo(ctx);
+            TagRepo = new PageTagRepo(ctx);
         }
 
         // GET: Admin/Pages
@@ -57,12 +60,33 @@ namespace Weblog.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage")] Page page, HttpPostedFileBase imgUp)
+        public ActionResult Create([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage")] Page page, HttpPostedFileBase imgUp, string tags)
         {
             if (ModelState.IsValid)
             {
                 page.PageVisitorCount = 0;
                 page.PageCreateDate = DateTime.Now;
+                List <Tag> tags_list = new List<Tag>();
+                tags += ",";
+                string text = "";
+                foreach (var item in tags)
+                {
+                    if (item != ',')
+                    {
+                        text += item;
+                    }
+                    else if (item == ',')
+                    {
+                        tags_list.Add(new Tag { TagName = text});
+                        text = "";
+                    }
+
+                }
+
+                var Tags = TagRepo.AddTags(tags_list);
+                TagRepo.SaveChanges();
+
+                page.Tags = Tags;
 
                 if (imgUp != null)
                 {

@@ -48,7 +48,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PageImage)
+            <img src="~/Content/images/@Model.PageImage" class="img-thumbnail" style="max-width: 100px" />
         </dd>
 
         <dt>
@@ -69,12 +69,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index", "pages", new { @class = "btn btn-secondary" })
         </div>
     }
 </div>

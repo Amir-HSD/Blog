@@ -89,5 +89,9 @@ namespace DataLayer
             _db.Dispose();
         }
 
+        public IEnumerable<ShowGroups> GetGroupsCategory()
+        {
+            return _db.PageGroup.Select(x => new ShowGroups { GroupID=x.PageGroupId, GroupName=x.PageGroupTitle, GroupPageCount=x.Pages.Count });
+        }
     }
 }

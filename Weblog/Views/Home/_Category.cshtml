@@ -1,0 +1,11 @@
+﻿@model IEnumerable<DataLayer.ShowGroups>
+<div class="widget widget-categories">
+    <h4 class="widget-title"><span>Categories</span></h4>
+    <ul class="list-unstyled widget-list">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="~/Category/@item.GroupID/@item.GroupName" class="d-flex">@item.GroupName<small class="ml-auto">(@item.GroupPageCount)</small></a></li>
+        }
+    </ul>
+</div>
