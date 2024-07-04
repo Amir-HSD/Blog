@@ -66,9 +66,41 @@
             @Html.DisplayFor(model => model.PageCreateDate)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.TagsPages)
+        </dt>
+
+        <dd>
+            <select class="form-control" multiple="multiple" id="input-tags" name="tags">
+                @foreach (var item in Model.TagsPages)
+                {
+                    <option selected>@item.Tag.TagName</option>
+                }
+            </select>
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PageId }, new {@class ="btn btn-warning"}) |
     @Html.ActionLink("Back to List", "Index","pages",new {@class ="btn btn-secondary"})
 </p>
+
+<script>
+    $('#input-tags').selectize({
+        delimiter: ',',
+        persist: false,
+        createFilter: function (input) {
+            return input.length > 2;
+        },
+        create: function (input) {
+            return {
+                value: input,
+                text: input
+            };
+        }
+    });
+
+    $('#input-tags')[0].selectize.lock();
+
+</script>

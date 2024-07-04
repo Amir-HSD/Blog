@@ -26,16 +26,16 @@ namespace DataLayer
             return _db.Pages.Find(id);
         }
 
-        public bool AddPage(Page page)
+        public Page AddPage(Page page)
         {
             try
             {
-                _db.Pages.Add(page);
-                return true;
+                var Page = _db.Pages.Add(page);
+                return Page;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 
@@ -43,7 +43,13 @@ namespace DataLayer
         {
             try
             {
-                _db.Entry(page).State = EntityState.Modified;
+                //_db.Entry(page).State = EntityState.Modified;
+                var p = _db.Pages.Find(page.PageId);
+                p.PageTitle = page.PageTitle;
+                p.PageGroup = page.PageGroup;
+                p.PageDescription = page.PageDescription;
+                p.PageContent = page.PageContent;
+                p.PageImage = page.PageImage;
                 return true;
             }
             catch (Exception)

@@ -3,17 +3,14 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UniqueTagName : DbMigration
+    public partial class updateTagsPages2 : DbMigration
     {
         public override void Up()
         {
-            CreateIndex("dbo.Tags", "TagName", unique: true);
-            DropTable("TagPages");
         }
         
         public override void Down()
         {
-            DropIndex("dbo.Tags", new[] { "TagName" });
         }
     }
 }

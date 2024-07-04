@@ -14,7 +14,7 @@ namespace DataLayer
 
         Page GetPageById(int id);
 
-        bool AddPage(Page page);
+        Page AddPage(Page page);
 
         bool UpdatePage(Page page);
         

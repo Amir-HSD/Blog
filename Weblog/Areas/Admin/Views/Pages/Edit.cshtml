@@ -61,6 +61,20 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.TagsPages, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select class="form-control" multiple="multiple" id="input-tags" name="tags">
+                @foreach (var item in Model.TagsPages)
+                {
+                    <option selected>@item.Tag.TagName</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.TagsPages, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Save" class="btn btn-success" />
             @Html.ActionLink("Back to List", "Index", "pages", new { @class = "btn btn-secondary" })
@@ -68,3 +82,21 @@
     </div>
 </div>
 }
+
+<script>
+    $('#input-tags').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        createFilter: function (input) {
+            return input.length > 2;
+        },
+        create: function (input) {
+            return {
+                value: input,
+                text: input
+            };
+        }
+    });
+
+</script>

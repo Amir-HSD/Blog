@@ -19,7 +19,7 @@ namespace DataLayer
         [MaxLength(20)]
         public string TagName { get; set; }
 
-        public virtual ICollection<Page> Pages { get; set; }
+        public virtual ICollection<TagsPages> TagsPages { get; set; }
 
     }
 }

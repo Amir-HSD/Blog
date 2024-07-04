@@ -5,12 +5,7 @@
 }
 
 <h2>Create</h2>
-<script src="~/Scripts/jquery-3.7.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/modal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/selectize/dist/js/standalone/selectize.min.js"></script>
-<link data-theme="bootstrap5" href="~/Content/selectize.bootstrap5.css" rel="stylesheet">
+
 
 
 
@@ -63,13 +58,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TagsPages, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" class="form-control" id="input-tags" name="tags">
-                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                
+                <select class="form-control" multiple="multiple" id="input-tags" name="tags">
+                </select>
+                @Html.ValidationMessageFor(model => model.TagsPages, "", new { @class = "text-danger" })
 
             </div>
         </div>
+
         <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

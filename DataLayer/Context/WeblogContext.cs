@@ -19,11 +19,28 @@ namespace DataLayer
         public DbSet<PageGroup> PageGroup { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<TagsPages> TagsPages { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tag>()
                 .HasIndex(t => t.TagName)
                 .IsUnique(true);
+
+            modelBuilder.Entity<TagsPages>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<TagsPages>()
+                .HasRequired(t=>t.Tag)
+                .WithMany(s=>s.TagsPages)
+                .HasForeignKey(t => t.TagId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<TagsPages>()
+                .HasRequired(t => t.Page)
+                .WithMany(s => s.TagsPages)
+                .HasForeignKey(t => t.PageId)
+                .WillCascadeOnDelete(true);
         }
 
     }

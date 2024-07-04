@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataLayer;
 using Microsoft.Ajax.Utilities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Weblog.Areas.Admin.Controllers
 {
@@ -20,10 +21,13 @@ namespace Weblog.Areas.Admin.Controllers
 
         IPageTagRepo TagRepo;
 
+        ITagsPagesRepo TagsPagesRepo;
+
         public PagesController()
         {
             PageRepo = new PageRepo(ctx);
             TagRepo = new PageTagRepo(ctx);
+            TagsPagesRepo = new TagsPagesRepo(ctx);
         }
 
         // GET: Admin/Pages
@@ -45,6 +49,7 @@ namespace Weblog.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(page);
         }
 
@@ -60,42 +65,38 @@ namespace Weblog.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage")] Page page, HttpPostedFileBase imgUp, string tags)
+        public ActionResult Create([Bind(Include = "PageId,PageGroupId,PageTitle,PageDescription,PageContent,PageImage")] Page page, HttpPostedFileBase imgUp)
         {
             if (ModelState.IsValid)
             {
                 page.PageVisitorCount = 0;
                 page.PageCreateDate = DateTime.Now;
-                List <Tag> tags_list = new List<Tag>();
-                tags += ",";
-                string text = "";
+
+
+                var tags = Request.Form.GetValues("tags");
+
+                List<Tag> tags_list = new List<Tag>();
+
                 foreach (var item in tags)
                 {
-                    if (item != ',')
-                    {
-                        text += item;
-                    }
-                    else if (item == ',')
-                    {
-                        tags_list.Add(new Tag { TagName = text});
-                        text = "";
-                    }
-
+                    tags_list.Add(new Tag { TagName = item });
                 }
 
                 var Tags = TagRepo.AddTags(tags_list);
                 TagRepo.SaveChanges();
-
-                page.Tags = Tags;
-
+                
                 if (imgUp != null)
                 {
                     page.PageImage = Guid.NewGuid() + Path.GetExtension(imgUp.FileName);
                     imgUp.SaveAs(Server.MapPath("/Content/images/"+page.PageImage));
                 }
 
-                PageRepo.AddPage(page);
+                var Page = PageRepo.AddPage(page);
                 PageRepo.SaveChanges();
+
+                TagsPagesRepo.AddTagsPages(Tags, Page);
+                TagsPagesRepo.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -115,6 +116,8 @@ namespace Weblog.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
+
             ViewBag.PageGroupId = new SelectList(ctx.PageGroup, "PageGroupId", "PageGroupTitle", page.PageGroupId);
             return View(page);
         }
@@ -137,6 +140,21 @@ namespace Weblog.Areas.Admin.Controllers
                     page.PageImage = Guid.NewGuid() + Path.GetExtension(imgUp.FileName);
                     imgUp.SaveAs(Server.MapPath("/Content/images/" + page.PageImage));
                 }
+
+                var tags = Request.Form.GetValues("tags");
+
+                List<Tag> tags_list = new List<Tag>();
+                
+                foreach (var item in tags)
+                {
+                    tags_list.Add(new Tag { TagName = item });
+                }
+
+                var Tags = TagRepo.AddTags(tags_list);
+                TagRepo.SaveChanges();
+
+                TagsPagesRepo.UpdateTagsPages(Tags, page);
+
                 PageRepo.UpdatePage(page);
                 PageRepo.SaveChanges();
                 return RedirectToAction("Index");
@@ -176,6 +194,8 @@ namespace Weblog.Areas.Admin.Controllers
             if (disposing)
             {
                 PageRepo.Dispose();
+                TagRepo.Dispose();
+                TagsPagesRepo.Dispose();
                 ctx.Dispose();
             }
             base.Dispose(disposing);
