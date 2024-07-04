@@ -12,10 +12,12 @@ namespace Weblog.Controllers
         WeblogContext ctx = new WeblogContext();
         IPageGroupRepo PageGroupRepo;
         IPageRepo PageRepo;
+        ITagsPagesRepo TagsPagesRepo;
         public HomeController()
         {
             PageGroupRepo = new PageGroupRepo(ctx);
             PageRepo = new PageRepo(ctx);
+            TagsPagesRepo = new TagsPagesRepo(ctx);
         }
         public ActionResult Index()
         {
@@ -46,7 +48,8 @@ namespace Weblog.Controllers
 
         public ActionResult ShowPostsBanner()
         {
-            return PartialView();
+            var Pages = PageRepo.GetAllPages().OrderByDescending(x => x.PageVisitorCount).Take(3).ToList();
+            return PartialView(Pages);
         }
 
         public ActionResult ShowCategory()
@@ -65,6 +68,34 @@ namespace Weblog.Controllers
         {
             var Pages = PageRepo.GetAllPages().OrderByDescending(x=>x.PageId).Take(3).ToList();
             return PartialView(Pages);
+        }
+
+        public ActionResult ShowTags()
+        {
+            List<ShowTags> showTags = new List<ShowTags>();
+            var Tags = TagsPagesRepo.GetAllTagsPages();
+
+            foreach (var Tag in Tags)
+            {
+                showTags.Add(new ShowTags
+                {
+                    TagId = Tag.TagId,
+                    TagName = Tag.Tag.TagName
+                });
+            }
+            
+            return PartialView(showTags);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                PageRepo.Dispose();
+                TagsPagesRepo.Dispose();
+                ctx.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }

@@ -11,11 +11,13 @@ namespace Weblog.Controllers
     {
         WeblogContext ctx;
         IPageRepo PageRepo;
+        ITagsPagesRepo TagsPagesRepo;
 
         public PostController()
         {
             ctx = new WeblogContext();
             PageRepo = new PageRepo(ctx);
+            TagsPagesRepo = new TagsPagesRepo(ctx);
 
         }
         // GET: Post
@@ -30,6 +32,23 @@ namespace Weblog.Controllers
             var Pages = PageRepo.GetPagesByGroupId(groupId);
             ViewBag.GroupTitle = groupTitle;
             return View(Pages);
+        }
+
+        [Route("Tags/{tagId}/{tagName}")]
+        public ActionResult ShowPostsByTagId(int tagId, string tagName)
+        {
+            var TagPages = TagsPagesRepo.GetTagPages(tagId);
+
+            ViewBag.GroupTitle = tagName;
+
+            List<Page> pages = new List<Page>();
+
+            foreach (var item in TagPages)
+            {
+                pages.Add(item.Page);
+            }
+
+            return View(pages);
         }
 
     }

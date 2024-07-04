@@ -307,6 +307,8 @@
     <Content Include="Views\Home\ShowPostsBanner.cshtml" />
     <Content Include="Views\Home\ShowMainBanner.cshtml" />
     <Content Include="Views\Post\ShowPostsByGroupId.cshtml" />
+    <Content Include="Views\Home\ShowTags.cshtml" />
+    <Content Include="Views\Post\ShowPostsByTagId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

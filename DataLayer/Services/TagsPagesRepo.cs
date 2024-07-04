@@ -16,17 +16,17 @@ namespace DataLayer
         }
         public IEnumerable<TagsPages> GetAllTagsPages()
         {
-            return _db.TagsPages;
+            return _db.TagsPages.ToList();
         }
 
         public IEnumerable<TagsPages> GetTagsPage(int PageId)
         {
-            return _db.TagsPages.Where(t=>t.PageId == PageId);
+            return _db.TagsPages.Where(t=>t.PageId == PageId).ToList();
         }
 
         public IEnumerable<TagsPages> GetTagPages(int TagId)
         {
-            return _db.TagsPages.Where(t => t.TagId == TagId);
+            return _db.TagsPages.Where(t => t.TagId == TagId).ToList();
         }
 
         public bool AddTagsPages(ICollection<Tag> Tags, Page Page)

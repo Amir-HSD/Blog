@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DataLayer.ShowTags>
+<div class="widget">
+    <h4 class="widget-title"><span>Tags</span></h4>
+    <ul class="list-inline widget-list-inline widget-card">
+        @foreach (var item in Model)
+        {
+            <li class="list-inline-item"><a href="~/Tags/@item.TagId/@item.TagName">@item.TagName</a></li>
+        }
+    </ul>
+</div>

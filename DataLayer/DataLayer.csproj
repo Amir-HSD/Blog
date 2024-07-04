@@ -121,6 +121,7 @@
     <Compile Include="Services\PageTagRepo.cs" />
     <Compile Include="Services\TagsPagesRepo.cs" />
     <Compile Include="ViewModel\ShowGroups.cs" />
+    <Compile Include="ViewModel\ShowTags.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

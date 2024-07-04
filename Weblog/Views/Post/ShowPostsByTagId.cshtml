@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<DataLayer.Page>
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "ShowPostsByGroupId";
 }
 
 <div class="col-lg-8  mb-5 mb-lg-0">
-    <h2 class="h5 section-title">Recent Post</h2>
+    <h1 class="h2 mb-4">Showing items from <mark>@ViewBag.GroupTitle</mark></h1>
 
     @foreach (var item in Model)
     {
