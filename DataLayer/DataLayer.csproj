@@ -116,6 +116,7 @@
     <Compile Include="Repository\IPageRepo.cs" />
     <Compile Include="Repository\IPageTagRepo.cs" />
     <Compile Include="Repository\ITagsPagesRepo.cs" />
+    <Compile Include="Services\PageCommentRepo.cs" />
     <Compile Include="Services\PageGroupRepo.cs" />
     <Compile Include="Services\PageRepo.cs" />
     <Compile Include="Services\PageTagRepo.cs" />

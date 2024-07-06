@@ -12,6 +12,8 @@ namespace DataLayer
 
         IEnumerable<Page> GetPagesByGroupId(int GroupId);
 
+        IEnumerable<Page> SearchPage(string q);
+
         Page GetPageById(int id);
 
         Page AddPage(Page page);

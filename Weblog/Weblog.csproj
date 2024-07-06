@@ -133,6 +133,7 @@
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -309,6 +310,9 @@
     <Content Include="Views\Post\ShowPostsByGroupId.cshtml" />
     <Content Include="Views\Home\ShowTags.cshtml" />
     <Content Include="Views\Post\ShowPostsByTagId.cshtml" />
+    <Content Include="Views\Post\ShowPost.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Post\ShowCommentsPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

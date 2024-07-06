@@ -12,12 +12,14 @@ namespace Weblog.Controllers
         WeblogContext ctx;
         IPageRepo PageRepo;
         ITagsPagesRepo TagsPagesRepo;
+        IPageCommentRepo PageCommentRepo;
 
         public PostController()
         {
             ctx = new WeblogContext();
             PageRepo = new PageRepo(ctx);
             TagsPagesRepo = new TagsPagesRepo(ctx);
+            PageCommentRepo = new PageCommentRepo(ctx);
 
         }
         // GET: Post
@@ -49,6 +51,46 @@ namespace Weblog.Controllers
             }
 
             return View(pages);
+        }
+
+        [Route("Post/{postId}/{postTitle}")]
+        public ActionResult ShowPost(int postId)
+        {
+            var Page = PageRepo.GetPageById(postId);
+            return View(Page);
+        }
+
+        public ActionResult AddComment(int postId, string commentContent, string CommentName, string CommentEmail)
+        {
+            PageComment comment = new PageComment()
+            {
+                PageId = postId,
+                PageCommentName = CommentName,
+                PageCommentText = commentContent,
+                PageCommentEmail = CommentEmail
+            };
+
+            var Comment = PageCommentRepo.AddComment(comment);
+
+            PageCommentRepo.SaveChanges();
+
+            return PartialView("ShowCommentsPage", PageCommentRepo.GetAllComment(postId));
+
+        }
+
+        public ActionResult ShowCommentsPage(int postId)
+        {
+            var Comments = PageCommentRepo.GetAllComment(postId);
+
+            return PartialView(Comments);
+        }
+
+        public void Dispose()
+        {
+            PageCommentRepo.Dispose();
+            TagsPagesRepo.Dispose();
+            PageRepo.Dispose();
+            ctx.Dispose();
         }
 
     }

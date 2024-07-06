@@ -23,6 +23,7 @@ namespace Weblog.Controllers
         {
             ViewBag.ShowMainBanner = true;
             ViewBag.ShowPostBanner = true;
+            ViewBag.ShowCategory = true;
             var Pages = PageRepo.GetAllPages().OrderByDescending(x => x.PageId);
             return View(Pages);
         }

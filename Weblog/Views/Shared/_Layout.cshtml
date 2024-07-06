@@ -31,7 +31,7 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/Content/css/style.css" media="screen">
-    
+
 
     <!--Favicon-->
     <link rel="shortcut icon" href="/Content/images/favicon.png" type="image/x-icon">
@@ -91,26 +91,30 @@
         <div class="container">
             <div class="row justify-content-center">
                 @RenderBody()
-                
-                <aside class="col-lg-4 sidebar-home">
-                    <!-- Search -->
-                    <div class="widget">
-                        <h4 class="widget-title"><span>Search</span></h4>
-                        <form action="#!" class="widget-search">
-                            <input class="mb-3" id="search-query" name="s" type="search" placeholder="Type &amp; Hit Enter...">
-                            <i class="ti-search"></i>
-                            <button type="submit" class="btn btn-primary btn-block">Search</button>
-                        </form>
-                    </div>
 
-                    @Html.Action("ShowCategory", "Home")
+                @if (ViewBag.ShowCategory == true)
+                {
+                    <aside class="col-lg-4 sidebar-home">
+                        <!-- Search -->
+                        <div class="widget">
+                            <h4 class="widget-title"><span>Search</span></h4>
+                            <form action="~/Search" class="widget-search">
+                                <input class="mb-3" id="search-query" name="q" type="search" placeholder="Type &amp; Hit Enter...">
+                                <i class="ti-search"></i>
+                                <button type="submit" class="btn btn-primary btn-block">Search</button>
+                            </form>
+                        </div>
 
-                    <!-- tags -->
-                    @Html.Action("ShowTags", "Home")
+                        @Html.Action("ShowCategory", "Home")
 
-                    <!-- recent post -->
-                    @Html.Action("ShowRecentPost", "Home")
-                </aside>
+                        <!-- tags -->
+                        @Html.Action("ShowTags", "Home")
+
+                        <!-- recent post -->
+                        @Html.Action("ShowRecentPost", "Home")
+                    </aside>
+                }
+
             </div>
         </div>
     </section>

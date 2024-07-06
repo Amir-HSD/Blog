@@ -1,0 +1,87 @@
+﻿@model DataLayer.Page
+@{
+    ViewBag.Title = "ShowPost";
+}
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class=" col-lg-9   mb-5 mb-lg-0">
+                <article>
+                    <div class="post-slider mb-4 slick-initialized slick-slider">
+                        <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 690px; transform: translate3d(0px, 0px, 0px);"><img src="/Content/images/@Model.PageImage" class="card-img slick-slide slick-current slick-active" alt="post-thumb" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 690px;"></div></div>
+                    </div>
+
+                    <h1 class="h2">@Model.PageTitle</h1>
+                    <ul class="card-meta my-3 list-inline">
+                        <li class="list-inline-item">
+                            <a href="author-single.html" class="card-meta-author">
+                                <img src="images/john-doe.jpg">
+                                <span>Charls Xaviar</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="ti-timer"></i>2 Min To Read
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="ti-calendar"></i>@Model.PageCreateDate
+                        </li>
+                        <li class="list-inline-item">
+                            <ul class="card-meta-tag list-inline">
+                                @foreach (var item in Model.TagsPages)
+                                {
+                                    <li class="list-inline-item"><a href="~/Tags/@item.TagId/@item.Tag.TagName">@item.Tag.TagName</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="content">
+                        @Model.PageContent
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="col-lg-9 col-md-12" id="commentlist">
+                
+                @Html.Action("ShowCommentsPage")
+
+                <div>
+                    <h3 class="mb-4">Leave a Reply</h3>
+                    <form method="POST">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <textarea class="form-control shadow-none" id="ccontent" rows="7" required=""></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input class="form-control shadow-none" type="text" id="cname" placeholder="Name" required="">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input class="form-control shadow-none" type="email" id="cemail" placeholder="Email">
+                                <p class="font-weight-bold valid-feedback">OK! You can skip this field.</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="button" onclick="AddComment()">Comment Now</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function AddComment() {
+        $.ajax({
+            url: "/post/AddComment/",
+            type: "Get",
+            data: { postId: @Model.PageId, commentContent: $("#ccontent").val(), CommentName: $("#cname").val(), CommentEmail: $("#cemail").val() }
+        }).done(function (result) {
+            $("#commentlist").html(result)
+            $("#ccontent").val("");
+            $("#cname").val("");
+            $("#cemail").val("");
+        })
+    }
+</script>

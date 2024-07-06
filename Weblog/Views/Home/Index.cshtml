@@ -13,7 +13,7 @@
                 <img src="/Content/images/@item.PageImage" class="card-img-top" alt="post-thumb">
             </div>
             <div class="card-body">
-                <h3 class="mb-3"><a class="post-title" href="post-details.html">@item.PageTitle</a></h3>
+                <h3 class="mb-3"><a class="post-title" href="~/Post/@item.PageId/@item.PageTitle">@item.PageTitle</a></h3>
                 <ul class="card-meta list-inline">
                     <li class="list-inline-item">
                         <a href="author-single.html" class="card-meta-author">
@@ -37,7 +37,7 @@
                     </li>
                 </ul>
                 <p>@item.PageDescription</p>
-                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+                <a href="~/Post/@item.PageId/@item.PageTitle" class="btn btn-outline-primary">Read More</a>
             </div>
         </article>
     }

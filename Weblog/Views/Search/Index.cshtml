@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<DataLayer.Page>
 @{
-    ViewBag.Title = "ShowPostsByGroupId";
+    ViewBag.Title = "Index";
 }
 
 <div class="col-lg-8  mb-5 mb-lg-0">
-    <h1 class="h2 mb-4">Showing items from <mark>@ViewBag.GroupTitle</mark></h1>
+    <h1 class="h2 mb-4">Search Result for <mark>@ViewBag.SearchContent</mark></h1>
 
     @foreach (var item in Model)
     {
@@ -54,3 +54,4 @@
         </li>
     </ul>
 </div>
+
