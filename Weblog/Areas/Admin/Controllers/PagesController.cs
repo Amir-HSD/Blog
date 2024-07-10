@@ -9,10 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using DataLayer;
 using Microsoft.Ajax.Utilities;
+using Weblog.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Weblog.Areas.Admin.Controllers
 {
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class PagesController : Controller
     {
         private WeblogContext ctx = new WeblogContext();

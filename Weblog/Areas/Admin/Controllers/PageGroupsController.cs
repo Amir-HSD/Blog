@@ -8,9 +8,11 @@ using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 using DataLayer;
+using Weblog.Models;
 
 namespace Weblog.Areas.Admin.Controllers
 {
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class PageGroupsController : Controller
     {
 

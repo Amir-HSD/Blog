@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="row no-gutters justify-content-center">
+        <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+
+            <img class="author-image" src="https://images.nightcafe.studio//assets/profile.png?tr=w-9999,c-at_max">
+
+        </div>
+        <div class="col-md-8 col-lg-6 text-center text-md-left">
+            <h3 class="mb-2">Hello @ViewBag.UserRole @ViewBag.UserName @ViewBag.UserFamily</h3>
+            <strong class="mb-2 d-block">@ViewBag.UserEmail</strong>
+
+            <ul class="list-inline">
+                <a class="btn btn-danger" href="~/account/signout">Signout</a>
+                <button type="button" class="btn btn-warning">Edit User Profile</button>
+                @if (ViewBag.UserRole == "Admin")
+                {
+                    <a class="btn btn-dark" href="~/Admin/pages">Admin Dashboard</a>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+

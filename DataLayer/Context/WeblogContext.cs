@@ -18,8 +18,9 @@ namespace DataLayer
         public DbSet<PageComment> PageComment { get; set; }
         public DbSet<PageGroup> PageGroup { get; set; }
         public DbSet<Tag> Tags { get; set; }
-
         public DbSet<TagsPages> TagsPages { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
